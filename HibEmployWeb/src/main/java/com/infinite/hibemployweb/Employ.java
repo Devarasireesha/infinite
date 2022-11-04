@@ -17,10 +17,7 @@ import javax.persistence.Table;
 	        	name="searchEmploy",
 	        	query="from Employ where empno=:empno"
 	        ),
-	        @NamedQuery(
-		        name="showDepartmentFilter",
-		        query="from Employ where dept=:dept AND basic > :basic"
-		    ),
+	        
 	    }  
 	)  
 
