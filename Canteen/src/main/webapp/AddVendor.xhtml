@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html">
+<h:body>
+<h1>Vendor Registration</h1>
+<h:form>
+Vendor Name:
+<h:inputText value="#{vendor.vend_name}"/>
+<br/><br/>
+Vendor Email:
+<h:inputText value="#{vendor.vend_email}"/><br/><br/>
+Vendor Mob No:
+<h:inputText value="#{vendor.vend_mob_no}"/><br/><br/>
+Vendor Password:
+<h:inputText value="#{vendor.vend_password}"/><br/><br/>
+Vendor userName:
+<h:inputText value="#{vendor.vend_userName}"/><br/><br/>
+<h:commandButton value="Save" action="#{VendorDAO.addVendor(vendor)}"/>
+<h:link outcome="ShowVendor" value="View Vendor Records"/>
+</h:form>
+</h:body>
+</html>

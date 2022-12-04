@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+<h1>Customer Registration</h1>
+<h:form>
+Customer Name:
+<h:inputText id="cust_name" required="true" value="#{customer.cust_name}"
+				requiredMessage="Mobile Name is mandatory"></h:inputText>
+<br/><br/>
+Customer city:
+<h:inputText value="#{customer.cust_city}"/>
+<br/><br/>
+Customer Gender:
+<h:inputText value="#{customer.cust_gender}"/>
+<br/><br/>
+Customer Phn Number:
+<h:inputText value="#{customer.cust_phn_no}"  validator="#{customerDAO.validatePhnNo}"/>
+Customer email:
+<h:inputText id="cust_email" value="#{customer.cust_email}" 
+			 validator="#{customerDAO.validateEmail}">
+		</h:inputText>
+<h:inputText value="#{customer.cust_email}"/>
+<br/><br/>
+Customer Password:
+<h:inputText value="#{customer.cust_password}" validator="#{customerDAO.validatePassword}"/>
+<br/><br/>
+Customer userName:
+<h:inputText value="#{customer.cust_userName}"/>
+<br/><br/>
+<h:commandButton value="Save" action="#{CustomerDAO.addCustomer(customer)}"/>
+<h:link outcome="ShowCustomer" value="View Customer Records"/>
+</h:form>
+</h:body>
+</html>

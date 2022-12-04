@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+	<h:form>
+			<center>
+                <h2><h:outputText value="Vendor Records"/></h2>
+            </center>
+        <h:dataTable value="#{VendorDAO.showVendor()}" var="vendor" border="3">
+        	    <h:column>
+                    <f:facet name="header">Vendor Id</f:facet>
+                    <h:outputText value="#{vendor.vend_id}"/>
+                </h:column>
+                        <h:column>
+                    <f:facet name="header">Vendor Name</f:facet>
+                    <h:outputText value="#{vendor.vend_name}"/>
+                </h:column>
+                    <h:column>
+                    <f:facet name="header">Vendor Email</f:facet>
+                    <h:outputText value="#{vendor.vend_email}"/>
+                </h:column>
+                    <h:column>
+                    <f:facet name="header">Vendor MOb No</f:facet>
+                    <h:outputText value="#{vendor.vend_mob_no}"/>
+                </h:column>
+                    <h:column>
+                    <f:facet name="header">password</f:facet>
+                    <h:outputText value="#{vendor.vend_password}"/>
+                </h:column>
+                 <h:column>
+                    <f:facet name="header">UserName</f:facet>
+                    <h:outputText value="#{vendor.vend_userName}"/>
+                </h:column>
+                
+                
+        </h:dataTable>
+        <center>
+        <h:commandButton action = "AddVendor.xhtml?faces-redirect=true"
+        	 value="Add Vendor" /> 
+       </center>
+        </h:form>
+	</h:body>
+</html>

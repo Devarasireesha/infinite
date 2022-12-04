@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+	<h:form>
+			<center>
+                <h2><h:outputText value="Customer Records"/></h2>
+            </center>
+        <h:dataTable value="#{CustomerDAO.showCustomer()}" var="customer" border="3">
+        	    <h:column>
+                    <f:facet name="header">Customer Id</f:facet>
+                    <h:outputText value="#{customer.cust_id}"/>
+                </h:column>
+                        <h:column>
+                    <f:facet name="header">Customer Name</f:facet>
+                    <h:outputText value="#{customer.cust_name}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">City</f:facet>
+                    <h:outputText value="#{customer.cust_city}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Gender</f:facet>
+                    <h:outputText value="#{customer.cust_gender}"/>
+                </h:column>
+                    
+                    <h:column>
+                    <f:facet name="header">Customer phn No</f:facet>
+                    <h:outputText value="#{customer.cust_phn_no}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Customer Email</f:facet>
+                    <h:outputText value="#{customer.cust_email}"/>
+                </h:column>
+                    <h:column>
+                    <f:facet name="header">password</f:facet>
+                    <h:outputText value="#{customer.cust_password}"/>
+                </h:column>
+                 <h:column>
+                    <f:facet name="header">UserName</f:facet>
+                    <h:outputText value="#{customer.cust_userName}"/>
+                </h:column>
+                
+                
+        </h:dataTable>
+        <center>
+        <h:commandButton action = "AddCustomer.xhtml?faces-redirect=true"
+        	 value="Add Customer" /> 
+       </center>
+        </h:form>
+	</h:body>
+</html>
