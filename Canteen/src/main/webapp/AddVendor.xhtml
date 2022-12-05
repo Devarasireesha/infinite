@@ -4,21 +4,32 @@
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:h="http://java.sun.com/jsf/html">
 <h:body>
-<h1>Vendor Registration</h1>
+
+
 <h:form>
+<center>
+<h1>Vendor Registration</h1>
 Vendor Name:
-<h:inputText value="#{vendor.vend_name}"/>
+<h:inputText id="vend_name" required="true" value="#{vendor.vend_name}"
+				requiredMessage="Name is mandatory"></h:inputText>
 <br/><br/>
 Vendor Email:
-<h:inputText value="#{vendor.vend_email}"/><br/><br/>
+<h:inputText id="vend_email" value="#{vendor.vend_email}" 
+			 validator="#{vendorDAO.validateEmail}">
+		</h:inputText>
+<br/><br/>
 Vendor Mob No:
-<h:inputText value="#{vendor.vend_mob_no}"/><br/><br/>
+<h:inputText value="#{vendor.vend_mob_no}"  validator="#{vendorDAO.validateMobNo}"/><br/><br/>
+
 Vendor Password:
-<h:inputText value="#{vendor.vend_password}"/><br/><br/>
+<h:inputText value="#{vendor.vend_password}" validator="#{vendorDAO.validatePassword}"/>
+<br/><br/>
 Vendor userName:
 <h:inputText value="#{vendor.vend_userName}"/><br/><br/>
-<h:commandButton value="Save" action="#{VendorDAO.addVendor(vendor)}"/>
+<h:commandButton value="Save" action="#{vendorDAO.addVendor(vendor)}"/>
 <h:link outcome="ShowVendor" value="View Vendor Records"/>
+</center>
 </h:form>
+
 </h:body>
 </html>

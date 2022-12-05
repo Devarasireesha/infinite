@@ -9,7 +9,7 @@ xmlns:f="http://java.sun.com/jsf/core">
 <h:form>
 Customer Name:
 <h:inputText id="cust_name" required="true" value="#{customer.cust_name}"
-				requiredMessage="Mobile Name is mandatory"></h:inputText>
+				requiredMessage="Name is mandatory"></h:inputText>
 <br/><br/>
 Customer city:
 <h:inputText value="#{customer.cust_city}"/>
@@ -22,16 +22,14 @@ Customer Phn Number:
 Customer email:
 <h:inputText id="cust_email" value="#{customer.cust_email}" 
 			 validator="#{customerDAO.validateEmail}">
-		</h:inputText>
-<h:inputText value="#{customer.cust_email}"/>
-<br/><br/>
+		</h:inputText><br/><br/>
 Customer Password:
 <h:inputText value="#{customer.cust_password}" validator="#{customerDAO.validatePassword}"/>
 <br/><br/>
 Customer userName:
 <h:inputText value="#{customer.cust_userName}"/>
 <br/><br/>
-<h:commandButton value="Save" action="#{CustomerDAO.addCustomer(customer)}"/>
+<h:commandButton value="Save" action="#{customerDAO.addCustomer(customer)}"/>
 <h:link outcome="ShowCustomer" value="View Customer Records"/>
 </h:form>
 </h:body>

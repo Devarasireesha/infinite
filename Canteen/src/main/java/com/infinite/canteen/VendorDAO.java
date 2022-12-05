@@ -2,8 +2,12 @@ package com.infinite.canteen;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -14,7 +18,7 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-@ManagedBean(name="VendorDAO")
+@ManagedBean(name="vendorDAO")
 @SessionScoped
 public class VendorDAO {
 	SessionFactory sessionFactory;
@@ -39,6 +43,70 @@ public class VendorDAO {
 		}
 	}
 
+	public void validatePhnNo(FacesContext context, UIComponent comp,
+			Object value) {
+
+		System.out.println("inside validate method");
+
+		String mno = (String) value;
+		boolean flag=false;
+		if (mno.matches("\\d{10}"))  
+		{ flag=true;}
+		
+	      if(flag==false) {
+	    	  ((UIInput) comp).setValid(false);
+
+				FacesMessage message = new FacesMessage(
+						"invalid PhnNo");
+				context.addMessage(comp.getClientId(context), message); 
+	      }
+		
+	
+
+	}
+	
+	public void validatePassword(FacesContext context, UIComponent comp,
+			Object value) {
+
+		System.out.println("inside validate method");
+
+		String mno = (String) value;
+		String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
+	      boolean result=mno.matches(pattern);
+	      if(result==false) {
+	    	  ((UIInput) comp).setValid(false);
+
+				FacesMessage message = new FacesMessage(
+						"invalid Password");
+				context.addMessage(comp.getClientId(context), message); 
+	      }
+		
+	
+
+	}
+	public void validateEmail(FacesContext context, UIComponent comp,
+			Object value) {
+
+		System.out.println("inside validate method");
+
+		String mno = (String) value;
+		if (mno.indexOf('@')==-1) {
+			((UIInput) comp).setValid(false);
+
+			FacesMessage message = new FacesMessage(
+					"invalid Email");
+			context.addMessage(comp.getClientId(context), message);
+		}
+		if (mno.length() < 6) {
+			((UIInput) comp).setValid(false);
+
+			FacesMessage message = new FacesMessage(
+					"Minimum length of model number is 6");
+			context.addMessage(comp.getClientId(context), message);
+
+		}
+
+	}
 	public Vendor searchVendor(String vend_id) {
 		sessionFactory = SessionHelper.getConnection();
 		Session session = sessionFactory.openSession();
@@ -71,14 +139,18 @@ public class VendorDAO {
 
 	}
 
-	public int validate(String userName, String password) {
+	public String validate(Vendor vendor) {
 		sessionFactory = SessionHelper.getConnection();
 		Session session = sessionFactory.openSession();
 		Criteria cr = session.createCriteria(Vendor.class);
-		cr.add(Restrictions.eq("vend_userName", userName));
-		cr.add(Restrictions.eq("vend_password", password));
-		List<Restaurant> listres = cr.list();
-		return listres.size();
+		cr.add(Restrictions.eq("vend_userName", vendor.getVend_userName()));
+		cr.add(Restrictions.eq("vend_password", vendor.getVend_password()));
+		List<Vendor> vendorlist = cr.list();
+        if(vendorlist.size()==1) {
+            return "ShowCustomer.xhtml?faces-redirect=true";
+        }else {
+            return "Login.xhtml?faces-redirect=true";
+        }
 	}
 
 	public Vendor searchByName(String userName) {

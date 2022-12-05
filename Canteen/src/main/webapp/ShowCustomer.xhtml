@@ -9,7 +9,7 @@
 			<center>
                 <h2><h:outputText value="Customer Records"/></h2>
             </center>
-        <h:dataTable value="#{CustomerDAO.showCustomer()}" var="customer" border="3">
+        <h:dataTable value="#{customerDAO.showCustomer()}" var="customer" border="3">
         	    <h:column>
                     <f:facet name="header">Customer Id</f:facet>
                     <h:outputText value="#{customer.cust_id}"/>

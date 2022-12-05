@@ -4,13 +4,16 @@
 xmlns:h="http://java.sun.com/jsf/html" 
 xmlns:f="http://java.sun.com/jsf/core">
   <h:head>
- <title> Title</title>
+ <title>Login Page</title>
   </h:head>
        <h:body>
+       <center>
+       <h1>Vendor Login</h1>
           <h:form>
-              User Name <h:inputText value="#{customer.cust_userName}"></h:inputText><br></br>
-              Password <h:inputSecret value="#{customer.cust_password}"></h:inputSecret><br></br>
-              <h:commandButton action="#{CustomerDAO.loginCheck(user,pwd)}" value="Login"></h:commandButton>
+              User Name <h:inputText value="#{vendor.vend_userName}"></h:inputText><br/><br/>
+              Password <h:inputSecret value="#{vendor.vend_password}" validator="#{vendorDAO.validatePassword}"></h:inputSecret><br/><br/>
+              <h:commandButton action="#{vendorDAO.validate(vendor)}" value="Login"></h:commandButton>
          </h:form>
+         </center>
        </h:body>
      </html>

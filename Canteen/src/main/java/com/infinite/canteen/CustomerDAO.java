@@ -18,7 +18,7 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-@ManagedBean(name="CustomerDAO")
+@ManagedBean(name="customerDAO")
 @SessionScoped
 public class CustomerDAO {
 
@@ -31,13 +31,13 @@ public class CustomerDAO {
 		List<Customer> customerList = cr.list();
 		session.close();
 		if (customerList.size() == 0) {
-			return "S001";
+			return "C001";
 
 		} else {
 			String id = customerList.get(customerList.size() - 1).getCust_id();
 			int id1 = Integer.parseInt(id.substring(1));
 			id1++;
-			String id2 = String.format("S%03d", id1);
+			String id2 = String.format("C%03d", id1);
 			return id2;
 		}
 	}
@@ -153,33 +153,20 @@ public class CustomerDAO {
 	}
 
 	
-	public String loginCheck(String cust_userName, String cust_password) {
-		sFactory = SessionHelper.getConnection();
-		Session session = sFactory.openSession();
-		Criteria cr = session.createCriteria(Customer.class);
-		cr.add(Restrictions.eq("cust_userName", cust_userName));
-		cr.add(Restrictions.eq("cust_password", cust_password));
-		List<Customer> listcustomer = cr.list();
-		if(listcustomer.size()==1) {
-		return "/JSF_FILES/ShowCustomer.xhtml?faces-redirect=true";
+	public String checkUsers(Customer customer) {
+        sFactory = SessionHelper.getConnection();
+        Session session = sFactory.openSession();
+        Criteria cr = session.createCriteria(Customer.class);
+        cr.add(Restrictions.eq("cust_userName", customer.getCust_userName()));
+        cr.add(Restrictions.eq("cust_password", customer.getCust_password()));
+        List<Customer> listcustomer = cr.list();
+        if(listcustomer.size()==1) {
+            return "ShowCustomer.xhtml?faces-redirect=true";
+        }else {
+            return "Login.xhtml?faces-redirect=true";
+        }
 	}
-	       
-	       return "/Login.xhtml?faces-redirect=true";
-	  }
-
-	//public String loginCheck(Customer user) {
-      //  sFactory = SessionHelper.getConnection();
-      //  Session session = sFactory.openSession();
-      //  Criteria cr = session.createCriteria(Customer.class);
-      //  cr.add(Restrictions.eq("username", Customer.getCust_userName()));
-       // cr.add(Restrictions.eq("password", user.getPassword()));
-      //  List<Customer> listcustomer = cr.list();
-        //if(listcustomer.size()==1) {
-      //      return "/JSF_FILES/ShowCustomer.xhtml?faces-redirect=true";
-      //  }
-      //  return "/Login.xhtml?faces-redirect=true";
-   // }
-
+		
 	public List<OrderDetails> searchCustomerOrder(String custId, String searchType) {
 		sFactory = SessionHelper.getConnection();
 		Session session = sFactory.openSession();
